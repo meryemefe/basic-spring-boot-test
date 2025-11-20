@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: JUnit Test Results
-          path: target/surefire-reports/TEST-com.meryemefe.basic_spring_boot_test.BasicTests.xml
+          path: target/surefire-reports/*.xml
       - name: Build / package
         run: |
           echo "Add your build steps here"
