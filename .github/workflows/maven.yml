@@ -1,0 +1,64 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Deploy with Helios
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch_name:
+        description: "Branch to deploy"
+        required: true
+        type: string
+      commit_sha:
+        description: "Commit SHA (optional)"
+        required: false
+        type: string
+      environment_name:
+        description: "GitHub environment name"
+        required: true
+        type: string
+      triggered_by:
+        description: "Triggering user (optional)"
+        required: false
+        type: string
+
+concurrency: ${{ github.event.inputs.environment_name }}
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch_name }}
+
+      - name: Build / package (placeholder)
+        run: |
+          echo "Add your build steps here"
+          mvn -B package --file pom.xml
+
+  deploy:
+    needs: prepare
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment_name }}
+    steps:
+      - name: Checkout commit to deploy
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.commit_sha || github.event.inputs.branch_name }}
+
+      - name: Deploy placeholder
+        run: |
+          echo "Deploying commit ${{ github.event.inputs.commit_sha || github.event.inputs.branch_name }}"
+          # Replace with actual deployment commands (kubectl, ssh, etc.)
+
+      - name: Notify completion
+        run: |
+          echo "Deployment finished for ${{ github.event.inputs.environment_name }} by ${{ github.event.inputs.triggered_by || 'Helios' }}"
