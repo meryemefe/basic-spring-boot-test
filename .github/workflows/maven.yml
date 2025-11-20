@@ -31,7 +31,7 @@ on:
         required: false
         type: string
 
-concurrency: ${{ github.event.inputs.environment_name }}
+concurrency: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment_name || 'noop' }}
 
 jobs:
   prepare:
