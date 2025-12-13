@@ -36,6 +36,7 @@ concurrency: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs
 jobs:
   prepare:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment_name }}
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
