@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 		"logging.level.com.meryemefe.basic_spring_boot_test=TRACE"
 })
 @Slf4j
+@DisplayName("Basic Tests")
 public class BasicTests {
 
 	@Test
