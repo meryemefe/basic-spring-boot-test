@@ -1,6 +1,7 @@
 package com.meryemefe.basic_spring_boot_test;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -31,5 +32,13 @@ public class BasicTests {
 		log.error("Test logs for ERROR level");
 		int sum = 2 + 2;
 		assert sum == 5 : "2 + 2 should equal 5";
+	}
+
+	// Give a "Test > Dummy Test" name to this test
+	@Test
+	@DisplayName("Test > Dummy")
+	public void testDummy() {
+		boolean val = false;
+		assert val : "Dummy val should be true";
 	}
 }
