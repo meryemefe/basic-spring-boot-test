@@ -16,8 +16,20 @@ public class BasicTests {
 	}
 
 	@Test
+	public void testAdditionThreePlusFive() {
+		int sum = 3 + 5;
+		assert sum == 8 : "3 + 5 should equal 8";
+	}
+
+	@Test
 	public void testWrongAddition() {
 		int sum = 2 + 2;
 		assert sum == 5 : "2 + 2 should equal 5";
+	}
+
+	@Test
+	public void testWrongSubstraction() {
+	    int result = 5 - 3;
+	    assert result == 8 : "5 - 3 should equal 2";
 	}
 }
