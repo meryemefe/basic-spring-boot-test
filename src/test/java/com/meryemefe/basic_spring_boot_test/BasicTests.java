@@ -26,4 +26,10 @@ public class BasicTests {
 		int sum = 2 + 2;
 		assert sum == 5 : "2 + 2 should equal 5";
 	}
+
+	@Test
+	public void testWrongSubstraction() {
+	    int result = 5 - 3;
+	    assert result == 8 : "5 - 3 should equal 2";
+	}
 }
