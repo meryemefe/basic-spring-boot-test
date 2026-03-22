@@ -32,4 +32,10 @@ public class BasicTests {
 	    int result = 5 - 3;
 	    assert result == 8 : "5 - 3 should equal 2";
 	}
+
+	@Test
+	public void testWrongSubstraction2() {
+	    int result = 5 - 3;
+	    assert result == 8 : "5 - 3 should equal 2";
+	}
 }
