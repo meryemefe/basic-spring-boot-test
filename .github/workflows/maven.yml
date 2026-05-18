@@ -10,7 +10,7 @@ name: Deploy with Helios
 
 on:
   push:
-    branches: [ main ]
+  #  branches: [ main ]
   pull_request:
   workflow_dispatch:
     inputs:
