@@ -10,7 +10,7 @@ name: Deploy with Helios
 
 on:
   push:
-    branches: [ main ]
+  #  branches: [ main ]
   pull_request:
   workflow_dispatch:
     inputs:
@@ -31,12 +31,27 @@ on:
         required: false
         type: string
 
-concurrency: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment_name || 'noop' }}
+#concurrency: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment_name || 'noop' }}
 
 jobs:
   prepare:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment_name }}
     steps:
+      # Save the triggering workflow information as an artifact for later reference
+      - name: Save triggering workflow info
+        run: |
+          echo "TRIGGERING_WORKFLOW_RUN_ID=${{ github.run_id }}" > workflow-context.txt
+          echo "TRIGGERING_WORKFLOW_HEAD_BRANCH=${{ github.event.inputs.branch_name || github.ref_name }}" >> workflow-context.txt
+          echo "TRIGGERING_WORKFLOW_HEAD_SHA=${{ github.event.inputs.commit_sha || github.sha }}" >> workflow-context.txt
+          echo "TRIGGERED_BY=${{ github.event.inputs.triggered_by || github.actor }}" >> workflow-context.txt
+          cat workflow-context.txt
+
+      - name: Upload workflow context
+        uses: actions/upload-artifact@v6
+        with:
+          name: workflow-context
+          path: workflow-context.txt
       - name: Checkout branch
         uses: actions/checkout@v4
         with:
